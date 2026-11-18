@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: custora-ai
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python -m ml.train
+    startCommand: gunicorn -w 2 -b 0.0.0.0:$PORT "backend.app:create_app()"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8

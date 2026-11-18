@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Custora AI: Customer Lifetime Value Prediction</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="wrap">
+<div class="top"><div class="logo"><i></i>Custora AI</div>
+<div class="set"><span class="pill" id="dbs" style="background:var(--gray)">Connecting…</span><span>Theme</span>
+<button class="sw" data-th="pop" aria-pressed="true" aria-label="Pop theme" title="Pop"></button><button class="sw" data-th="night" aria-pressed="false" aria-label="Night theme" title="Night"></button><button class="sw" data-th="fresh" aria-pressed="false" aria-label="Fresh theme" title="Fresh"></button>
+<label for="cur">Currency</label><select id="cur"><option>$</option><option>₹</option><option>€</option><option>£</option></select>
+<label for="mar">Margin %</label><input id="mar" type="number" value="35" min="1" max="100"></div></div>
+
+<header class="hero"><div><h1>Know what every customer is worth.</h1>
+<p class="lead">A machine learning service that predicts 12-month customer value and churn risk from purchase behaviour and engagement data, then suggests the next best action.</p>
+<div class="stickers"><span class="s1">Lifetime value</span><span class="s2">Churn risk</span><span class="s3">Next best action</span></div></div>
+<div class="tkw"><div class="blob b1"></div><div class="blob b2"></div>
+<div class="ticket"><div class="tt">Model in production</div><div class="tn" id="mname">…</div><div class="tv" id="mr2">R² –</div>
+<div class="tt" id="mauc">&nbsp;</div><div class="perf"></div><div class="tf"><span class="pill" id="mver" style="background:var(--mint)">v–</span><div class="bar"></div></div></div></div></header>
+
+<div class="tabs" role="tablist" id="tabs">
+<button role="tab" data-t="predict" aria-selected="true">Predict a customer</button>
+<button role="tab" data-t="batch" aria-selected="false">Score a customer list</button>
+<button role="tab" data-t="planner" aria-selected="false">Plan my business</button>
+<button role="tab" data-t="model" aria-selected="false">Model report</button>
+<button role="tab" data-t="history" aria-selected="false">My data</button></div>
+
+<section class="pane on" id="p-predict"><div class="g">
+<div class="card"><h3>Customer details</h3><div class="fld"><label for="name">Customer name or ID</label><input type="text" id="name" value="Asha"></div><div id="sl"></div></div>
+<div><div class="card" id="res"></div>
+<div class="card"><h3>Why this score</h3><p class="mute sm">Change in predicted value when each detail is set to that of a typical customer.</p><div id="drv"></div></div>
+<div class="card"><h3>Next best actions</h3><ul class="act" id="act"></ul>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" id="save1">Save customer</button><button class="btn alt" id="copy1">Copy summary</button></div></div></div>
+</div></section>
+
+<section class="pane" id="p-batch">
+<div class="card"><h3>Upload your customers</h3>
+<p class="mute sm" style="margin:6px 0 14px">CSV columns are matched by name: <b>customer_id, recency, frequency, aov, tenure, sessions, email_click_rate, …</b>. At least two known columns are needed; missing ones use typical values.</p>
+<div class="drop" id="drop"><p>Drop a CSV here or</p><p style="margin-top:10px"><input type="file" id="file" accept=".csv,text/csv" hidden>
+<button class="btn" id="pick">Choose file</button> <button class="btn alt" id="sample">Try the sample list</button></p></div>
+<p id="err" style="color:var(--coral);margin-top:10px"></p></div>
+<div id="lres" hidden>
+<div class="card"><div class="kp" id="lkp"></div><div class="stack" id="stk"></div><div class="leg" id="leg"></div></div>
+<div class="card"><div class="two"><input type="text" id="q" placeholder="Search by ID"><div class="chips" id="fs" style="margin:0"></div></div>
+<div class="tw"><table><thead><tr id="thr"></tr></thead><tbody id="tb"></tbody></table></div>
+<div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn alt" id="more">Show more</button><button class="btn alt" id="dl">Download scored CSV</button></div>
+<p class="mute sm" style="margin-top:10px">Tap a row to open that customer. Lists are saved to My data automatically.</p></div></div>
+</section>
+
+<section class="pane" id="p-planner"><div class="g">
+<div class="card"><h3>Your business</h3>
+<div class="two"><div class="fld"><label for="n">Customers</label><input type="number" id="n" value="5000"></div>
+<div class="fld"><label for="pa">Average order value</label><input type="number" id="pa" value="80"></div>
+<div class="fld"><label for="po">Orders per year</label><input type="number" id="po" value="4"></div>
+<div class="fld"><label for="cac">Cost to acquire a customer</label><input type="number" id="cac" value="60"></div></div>
+<div class="fld"><div class="r"><label for="ret">Yearly retention</label><b id="vret"></b></div><input type="range" id="ret" min="10" max="95" value="60"></div>
+<div class="fld"><div class="r"><label for="up">If retention improves by</label><b id="vup"></b></div><input type="range" id="up" min="0" max="20" value="5"></div></div>
+<div><div class="card" id="pres"></div><div class="card"><button class="btn" id="savep" style="margin-bottom:14px">Save this plan</button>
+<svg id="pch" viewBox="0 0 360 170" width="100%" role="img" aria-label="Cumulative profit per customer over five years"></svg>
+<div class="leg"><span><i class="dot" style="background:var(--gray)"></i>Today</span><span><i class="dot" style="background:var(--teal)"></i>With better retention</span></div></div></div>
+</div></section>
+
+<section class="pane" id="p-model">
+<div class="card"><h3>Revenue models</h3><p class="mute sm" style="margin:6px 0 10px" id="minfo"></p><div class="tw"><table class="m"><thead><tr><th>Model</th><th>RMSE</th><th>MAE</th><th>R²</th><th>CV RMSE</th></tr></thead><tbody id="mt"></tbody></table></div></div>
+<div class="g" style="margin-top:22px"><div class="card"><h3>What drives value</h3><p class="mute sm">Permutation importance on the test set.</p><div id="imp"></div></div>
+<div class="card"><h3>Actual vs predicted</h3><p class="mute sm">200 test customers. Points on the line are perfect predictions.</p><svg id="sc" viewBox="0 0 360 220" width="100%" role="img" aria-label="Scatter of actual versus predicted revenue"></svg></div></div>
+<div class="card"><h3>Retention classifier</h3><p class="mute sm" style="margin:6px 0 10px">Predicts whether a customer orders again in the next 12 months.</p><div class="tw"><table class="m"><thead><tr><th>Model</th><th>ROC-AUC</th><th>Accuracy</th><th>F1</th></tr></thead><tbody id="ct"></tbody></table></div></div>
+</section>
+
+<section class="pane" id="p-history">
+<div class="card"><h3>Your saved data</h3><p class="mute" style="margin-top:6px">Stored in the project database (SQLite) under a private id kept in this browser.</p><div class="kp" id="dkp"></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button class="btn alt" id="expj">Export everything (JSON)</button><button class="btn alt" id="wipe">Delete all my data</button></div></div>
+<div class="card"><h3>Saved customers</h3><div id="dc"></div></div>
+<div class="card"><h3>Scored lists</h3><div id="dbt"></div></div>
+<div class="card"><h3>Saved plans</h3><div id="dp"></div></div>
+</section>
+</div>
+<div id="toast"></div>
+<script src="/app.js"></script>
+</body>
+</html>

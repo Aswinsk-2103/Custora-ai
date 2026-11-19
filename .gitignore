@@ -1,7 +1,7 @@
 __pycache__/
 .venv/
 .pytest_cache/
-models/*.joblib
-models/metadata.json
+# models/*.joblib
+# models/metadata.json
 data/*.db
 data/synthetic_customers.csv
